@@ -14,13 +14,10 @@ angular
     function ($httpProvider, $routeProvider,$logProvider, $locationProvider) {
     var resolves;
 
-    // Set html5 mode to remove the hash
-    $locationProvider.html5Mode(true);
-
     /*
      * Set the debugger to true for local environment, false for production
      */
-    if (location.href === 'http://127.0.0.1:9000/')  {
+    if (location.host === 'http://127.0.0.1:9000/')  {
       $logProvider.debugEnabled(true);
     } else {
       $logProvider.debugEnabled(false);
@@ -28,12 +25,12 @@ angular
 
 // For readability I tend to pull out the resolve functions into their own object
     resolves = {
-      repoContrib: ['$log', '$q', '$routeParams', 'gitRepo', function($log, $q, $routeParams, gitRepo) {
+      repoContrib: ['$log', '$q', '$route', 'gitRepo', function($log, $q, $route, gitRepo) {
           var deferred = $q.defer(),
-            owner = $routeParams.owner,
-            repoName = $routeParams.repoName;
+            owner = $route.current.params.owner,
+            repoName = $route.current.params.repo;
 
-         gitRepo.getContributors(owner, repoName, function(repos) {
+         gitRepo.contributors(owner, repoName, function(repos) {
               deferred.resolve(repos);
           }, function (error) {
             // just logging for now due to time constraints
@@ -67,7 +64,7 @@ angular
         }
       })
       .when('/:owner/:repo', {
-        templateUrl: 'views/contributors.html',
+        templateUrl: '/views/contributors.html',
         controller: 'ContribCtrl',
         resolve: {
           contribList: resolves.repoContrib

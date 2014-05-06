@@ -18,4 +18,13 @@ angular.module('workhorseApp')
         $scope.contributors = angular.copy(contribList);
 
         // setup some interactions for the user
+        $scope.tallyCommits = function () {
+			var total = 0;
+
+			angular.forEach($scope.contributors, function (contributor) {
+				total += parseInt(contributor.contributions);
+			});
+
+			return total;
+        }
 }]);

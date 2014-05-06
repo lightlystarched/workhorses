@@ -1,11 +1,17 @@
-<ng-include src="'/views/header.tpl.html'"></ng-include>
+<div class="header">
+  <ul class="nav nav-pills pull-right">
+    <li><input type="text" class="form-control" ng-model="search.login" placeholder="Filter by name"></li>
+  </ul>
+  <h3 class="text-muted"><a ng-href="#/">Workhorses of Git</a></h3>
+</div>
 <div class="jumbotron">
   <h3>{{thisRepo.repo}}</h3>
   <h2>owner: {{thisRepo.owner}}</h2>
+  <h4>total commits: {{tallyCommits()}}
 </div>
 
 <div class="row">
-  <div class="repoBox col-md-4 col-lg-3 col-sm-6" ng-repeat="contributor in contributors | orderBy:'contributions'">
+  <div class="repoBox col-md-4 col-lg-3 col-sm-6" ng-repeat="contributor in contributors | orderBy:'contributions' | filter:search">
     <h3>{{contributor.login}}</h3>
     <h6>Commits: {{contributor.contributions}}</h6>
   </div>

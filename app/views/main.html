@@ -1,4 +1,9 @@
-<ng-include src="'/views/header.tpl.html'"></ng-include>
+<div class="header">
+  <ul class="nav nav-pills pull-right">
+    <li><input type="text" class="form-control" ng-model="search.name" placeholder="Filter by name"></li>
+  </ul>
+  <h3 class="text-muted"><a ng-href="#/">Workhorses of Git</a></h3>
+</div>
 <div class="jumbotron">
   <h3>Click on a repository to see how their contributors' commits stack up</h3>
   <h2>&ndash; OR &ndash;</h2>
@@ -7,8 +12,8 @@
 </div>
 
 <div class="row">
-  <div class="repoBox col-md-4 col-lg-3 col-sm-6" ng-repeat="repo in repos | filter:search" ng-href="/{{repo.owner.login}}/{{repo.name}}">
-    <h3><a ng-href="/{{repo.owner.login}}/{{repo.name}}">{{repo.name}}</a></h3>
+  <div class="repoBox col-md-4 col-lg-3 col-sm-6" ng-repeat="repo in repos | filter:search">
+    <h3><a ng-href="#/{{repo.owner.login}}/{{repo.name}}">{{repo.name}}</a></h3>
     <h6>{{repo.description}}</h6>
     <h5>Owner: {{repo.owner.login}}</h5>
     <h5>Commits: {{repo.commitCount}}</h5>

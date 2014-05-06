@@ -22,7 +22,7 @@ angular.module('workhorseApp')
                     var commits = 0;
                     gitRepo.contributors(repo.owner.login, repo.name, function (contributors) {
                         angular.forEach(contributors, function (contributor) {
-                            commits += Number(contributor.contributions);
+                            commits += parseInt(contributor.contributions);
                         });
                     });
 
