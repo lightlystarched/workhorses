@@ -8,7 +8,7 @@
 
 <div class="row">
   <div class="repoBox col-md-4 col-lg-3 col-sm-6" ng-repeat="repo in repos | filter:search" ng-href="/{{repo.owner.login}}/{{repo.name}}">
-    <h3>{{repo.name}}</h3>
+    <h3><a ng-href="/{{repo.owner.login}}/{{repo.name}}">{{repo.name}}</a></h3>
     <h6>{{repo.description}}</h6>
     <h5>Owner: {{repo.owner.login}}</h5>
     <h5>Commits: {{repo.commitCount}}</h5>

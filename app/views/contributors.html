@@ -1,16 +1,12 @@
 <ng-include src="'header.tpl.html'"></ng-include>
 <div class="jumbotron">
-  <h3>Click on a repository to see how their contributors' commits stack up</h3>
-  <h2>&ndash; OR &ndash;</h2>
-  <button class="btn btn-primary" ng-click="toggle.sortByCommits()" ng-disabled="true">Rank the lists by their commits</button>
-  <h6>(disabled because it could very well end your ability to access github's api for an hour or so)</h6>
+  <h3>{{thisRepo.repo}}</h3>
+  <h2>owner: {{thisRepo.owner}}</h2>
 </div>
 
 <div class="row">
-  <div class="repoBox col-md-4 col-lg-3 col-sm-6" ng-repeat="repo in repos | filter:search" ng-href="/{{repo.owner.login}}/{{repo.name}}">
-    <h3>{{repo.name}}</h3>
-    <h6>{{repo.description}}</h6>
-    <h5>Owner: {{repo.owner.login}}</h5>
-    <h5>Commits: {{repo.commitCount}}</h5>
+  <div class="repoBox col-md-4 col-lg-3 col-sm-6" ng-repeat="contributor in contributors | orderBy:'contributions'">
+    <h3>{{contributor.login}}</h3>
+    <h6>Commits: {{contributor.contributions}}</h6>
   </div>
 </div>

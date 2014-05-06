@@ -5,8 +5,14 @@ angular.module('workhorseApp')
     '$scope',
     '$log',
     '$location',
+    '$routeParams',
     'contribList',
-    function ($scope, $log, $location, contribList) {
+    function ($scope, $log, $location, $routeParams, contribList) {
+
+		$scope.thisRepo = {
+			owner: $routeParams.owner,
+			repo: $routeParams.repo
+		};
     
         // Keep the original list pristine in case we need to reset the scope
         $scope.contributors = angular.copy(contribList);
